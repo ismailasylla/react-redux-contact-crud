@@ -7,23 +7,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { useDispatch, useSelector } from "react-redux";
-import { loadUsers } from "../state/action-creator/actions";
+import { loadUsers, onDeleteUser } from "../state/action-creator/actions";
 import Button from "@mui/material/Button";
-
-function createData(
-  name: string,
-  email: string,
-  contact: number,
-  Address: string
-) {
-  return { name, email, contact, Address };
-}
-
-const rows = [
-  // createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  // createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  // createData("Eclair", 262, 16.0, 24, 6.0),
-];
 
 const Contacts = () => {
   let dispatch = useDispatch();
@@ -33,6 +18,10 @@ const Contacts = () => {
   useEffect(() => {
     dispatch(loadUsers());
   }, []);
+
+  const handleDelete = (id) => {
+    dispatch(onDeleteUser(id));
+  };
 
   return (
     <TableContainer component={Paper}>
@@ -58,8 +47,17 @@ const Contacts = () => {
                 <TableCell align="right">{user.contact}</TableCell>
                 <TableCell align="right">{user.address}</TableCell>
                 <TableCell align="right">
-                  {" "}
-                  <Button variant="outlined" color="error">
+                  <Button variant="outlined" color="primary">
+                    Edit
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    color="error"
+                    style={{ marginLeft: "10px" }}
+                    onClick={() => {
+                      handleDelete(user.id);
+                    }}
+                  >
                     Delete
                   </Button>
                 </TableCell>
