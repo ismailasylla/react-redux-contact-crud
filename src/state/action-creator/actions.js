@@ -9,7 +9,7 @@ const getUsers = (users) => ({
 export const loadUsers = () => {
   return function (dispatch) {
     axios
-      .get(`${process.env.REACT_APP_API}`)
+      .get("http://localhost:5002/user")
       .then((resp) => {
         console.log("resp", resp);
         dispatch(getUsers(resp.data));
@@ -17,3 +17,5 @@ export const loadUsers = () => {
       .catch((error) => console.log(error));
   };
 };
+
+// .get(`${process.env.REACT_APP_API}`)
