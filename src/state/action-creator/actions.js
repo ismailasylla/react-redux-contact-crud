@@ -10,8 +10,13 @@ const deleteUser = () => ({
   type: types.DELETE_USERS,
 });
 
+const onAddUser = () => ({
+  type: types.ADD_USER,
+});
+
 const apiUrl = "http://localhost:5002/user";
 
+// @GET All Users
 export const loadUsers = () => {
   return function (dispatch) {
     axios
@@ -23,6 +28,8 @@ export const loadUsers = () => {
       .catch((error) => console.log(error));
   };
 };
+
+// @Delete a single user
 export const onDeleteUser = (id) => {
   return function (dispatch) {
     axios
@@ -36,4 +43,19 @@ export const onDeleteUser = (id) => {
   };
 };
 
+// @Add user to the list
+export const addUser = (user) => {
+  return function (dispatch) {
+    axios
+      .post(`${apiUrl}`, user)
+      .then((res) => {
+        console.log("response", res);
+        dispatch(onAddUser());
+        // dispatch(loadUsers());
+      })
+      .catch((error) => console.log(error));
+  };
+};
+
+// todo implements env
 // .get(`${process.env.REACT_APP_API}`)

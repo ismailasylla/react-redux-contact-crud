@@ -4,6 +4,8 @@ import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../state/action-creator/actions";
 
 const AddUserForm = () => {
   const [state, setState] = useState({
@@ -18,6 +20,7 @@ const AddUserForm = () => {
   const { name, email, contact, address } = state;
 
   let navigate = useNavigate();
+  let dispatch = useDispatch();
 
   const handleChange = (e) => {
     let { name, value } = e.target;
@@ -27,14 +30,22 @@ const AddUserForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!name || !address || !email || !contact) {
-      setError("Please input all input Field");
+      setError("Input fields shoud not be blanck");
       console.log(error);
+    } else {
+      dispatch(addUser(state));
+      navigate("/");
+      setError("");
     }
   };
 
   return (
     <>
-      <h1 style={{ textAlign: "center" }}>Contact Form</h1>
+      <span style={{ textAlign: "center" }}>
+        <h1>Contact Form</h1>
+        {error && <h3 style={{ color: "red" }}>{error}</h3>}
+      </span>
+
       <div
         style={{
           display: "flex",
@@ -70,6 +81,7 @@ const AddUserForm = () => {
               label="Name"
               value={name}
               type="text"
+              name="name"
               onChange={handleChange}
             />
             <TextField
@@ -77,6 +89,7 @@ const AddUserForm = () => {
               label="Email"
               value={email}
               type="email"
+              name="email"
               onChange={handleChange}
             />
             <TextField
@@ -84,6 +97,7 @@ const AddUserForm = () => {
               label="Contact"
               value={contact}
               type="number"
+              name="contact"
               onChange={handleChange}
             />
             <TextField
@@ -91,6 +105,7 @@ const AddUserForm = () => {
               label="Address"
               value={address}
               type="text"
+              name="address"
               onChange={handleChange}
             />
           </Box>

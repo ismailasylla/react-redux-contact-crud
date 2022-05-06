@@ -10,7 +10,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadUsers, onDeleteUser } from "../state/action-creator/actions";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
-import { createStyled } from "@mui/system";
 
 const Contacts = () => {
   let dispatch = useDispatch();
