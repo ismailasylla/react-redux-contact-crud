@@ -6,13 +6,31 @@ const getUsers = (users) => ({
   payload: users,
 });
 
+const deleteUser = () => ({
+  type: types.DELETE_USERS,
+});
+
+const apiUrl = "http://localhost:5002/user";
+
 export const loadUsers = () => {
   return function (dispatch) {
     axios
-      .get("http://localhost:5002/user")
-      .then((resp) => {
-        console.log("resp", resp);
-        dispatch(getUsers(resp.data));
+      .get(`${apiUrl}`)
+      .then((res) => {
+        console.log("resp", res);
+        dispatch(getUsers(res.data));
+      })
+      .catch((error) => console.log(error));
+  };
+};
+export const onDeleteUser = (id) => {
+  return function (dispatch) {
+    axios
+      .delete(`${apiUrl}/${id}`)
+      .then((res) => {
+        console.log("response", res);
+        dispatch(deleteUser());
+        dispatch(loadUsers());
       })
       .catch((error) => console.log(error));
   };
