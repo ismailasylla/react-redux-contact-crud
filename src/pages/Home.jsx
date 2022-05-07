@@ -1,10 +1,10 @@
 import React from "react";
-import ContactsList from "./ContactsList";
+import UsersList from "./UsersList";
 
 function Home() {
   return (
     <div>
-      <ContactsList />
+      <UsersList />
     </div>
   );
 }

@@ -42,7 +42,7 @@ const EditUser = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!name || !address || !email || !contact) {
-      setError("Input fields shoud not be blanck");
+      setError("Input fields should not be blanck");
       console.log(error);
     } else {
       dispatch(addUser(state));

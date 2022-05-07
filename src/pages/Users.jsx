@@ -11,7 +11,7 @@ import { loadUsers, onDeleteUser } from "../state/action-creator/actions";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 
-const Contacts = () => {
+const Users = () => {
   let dispatch = useDispatch();
   let navigate = useNavigate();
 
@@ -97,4 +97,4 @@ const Contacts = () => {
   );
 };
 
-export default Contacts;
+export default Users;

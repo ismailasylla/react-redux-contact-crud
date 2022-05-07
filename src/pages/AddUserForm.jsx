@@ -30,7 +30,7 @@ const AddUserForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!name || !address || !email || !contact) {
-      setError("Input fields shoud not be blanck");
+      setError("Input fields should not be blanck");
       console.log(error);
     } else {
       dispatch(addUser(state));
@@ -42,7 +42,7 @@ const AddUserForm = () => {
   return (
     <>
       <span style={{ textAlign: "center" }}>
-        <h1>Contact Form</h1>
+        <h1>Add User</h1>
         {error && <h3 style={{ color: "red" }}>{error}</h3>}
       </span>
 
