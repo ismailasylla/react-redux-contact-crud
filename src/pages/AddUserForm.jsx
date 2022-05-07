@@ -114,7 +114,7 @@ const AddUserForm = () => {
           <Button
             variant="outlined"
             color="success"
-            style={{ width: "100px" }}
+            style={{ width: "100px", marginTop: "10px" }}
             type="submit"
           >
             Submit
