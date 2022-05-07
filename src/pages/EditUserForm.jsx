@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { addUser } from "../state/action-creator/actions";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addUser, getUserByid } from "../state/action-creator/actions";
 
-const AddUserForm = () => {
+const EditUser = () => {
   const [state, setState] = useState({
     name: "",
     email: "",
@@ -21,6 +21,18 @@ const AddUserForm = () => {
 
   let navigate = useNavigate();
   let dispatch = useDispatch();
+  let { id } = useParams();
+  const { user } = useSelector((state) => state.users);
+
+  useEffect(() => {
+    dispatch(getUserByid(id));
+  }, []);
+
+  useEffect(() => {
+    if (user) {
+      setState({ ...user });
+    }
+  }, [user]);
 
   const handleChange = (e) => {
     let { name, value } = e.target;
@@ -42,7 +54,7 @@ const AddUserForm = () => {
   return (
     <>
       <span style={{ textAlign: "center" }}>
-        <h1>Contact Form</h1>
+        <h1>Edit User</h1>
         {error && <h3 style={{ color: "red" }}>{error}</h3>}
       </span>
 
@@ -79,7 +91,7 @@ const AddUserForm = () => {
             <TextField
               id="outlined-name"
               label="Name"
-              value={name}
+              value={name || ""}
               type="text"
               name="name"
               onChange={handleChange}
@@ -87,7 +99,7 @@ const AddUserForm = () => {
             <TextField
               id="outlined-name"
               label="Email"
-              value={email}
+              value={email || ""}
               type="email"
               name="email"
               onChange={handleChange}
@@ -95,7 +107,7 @@ const AddUserForm = () => {
             <TextField
               id="outlined-name"
               label="Contact"
-              value={contact}
+              value={contact || ""}
               type="number"
               name="contact"
               onChange={handleChange}
@@ -103,7 +115,7 @@ const AddUserForm = () => {
             <TextField
               id="outlined-name"
               label="Address"
-              value={address}
+              value={address || ""}
               type="text"
               name="address"
               onChange={handleChange}
@@ -125,4 +137,4 @@ const AddUserForm = () => {
   );
 };
 
-export default AddUserForm;
+export default EditUser;
