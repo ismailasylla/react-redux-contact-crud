@@ -7,7 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { useDispatch, useSelector } from "react-redux";
-import { loadUsers, onDeleteUser } from "../state/action-creator/actions";
+import { loadUsers, deleteUser } from "../state/action-creator/actions";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 
@@ -22,7 +22,7 @@ const Users = () => {
   }, []);
 
   const handleDelete = (id) => {
-    dispatch(onDeleteUser(id));
+    dispatch(deleteUser(id));
   };
 
   return (

@@ -5,7 +5,7 @@ import { Button } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addUser, getUserByid } from "../state/action-creator/actions";
+import { getUserByid, updateUser } from "../state/action-creator/actions";
 
 const EditUser = () => {
   const [state, setState] = useState({
@@ -45,7 +45,7 @@ const EditUser = () => {
       setError("Input fields should not be blanck");
       console.log(error);
     } else {
-      dispatch(addUser(state));
+      dispatch(updateUser(state, id));
       navigate("/");
       setError("");
     }
@@ -129,7 +129,7 @@ const EditUser = () => {
             style={{ width: "100px" }}
             type="submit"
           >
-            Submit
+            Update
           </Button>
         </div>
       </form>
