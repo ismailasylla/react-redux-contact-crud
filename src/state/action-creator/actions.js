@@ -6,14 +6,19 @@ const getUsers = (users) => ({
   payload: users,
 });
 
-const deleteUser = () => ({
+const userDeleted = () => ({
   type: types.DELETE_USERS,
 });
 
-const onAddUser = () => ({
+const userAdded = () => ({
   type: types.ADD_USER,
 });
-const onGetUser = (user) => ({
+
+const userUpdated = () => ({
+  type: types.UPDATE_USER,
+});
+
+const getUser = (user) => ({
   type: types.GET_SINGLE_USER,
   payload: user,
 });
@@ -37,13 +42,13 @@ export const loadUsers = () => {
 };
 
 // @Delete a single user
-export const onDeleteUser = (id) => {
+export const deleteUser = (id) => {
   return function (dispatch) {
     axios
       .delete(`${apiUrl}/${id}`)
       .then((res) => {
         console.log("Calling Delete", res);
-        dispatch(deleteUser());
+        dispatch(userDeleted());
         dispatch(loadUsers());
       })
       .catch((error) => console.log(error));
@@ -57,7 +62,7 @@ export const addUser = (user) => {
       .post(`${apiUrl}`, user)
       .then((res) => {
         console.log("Adding...", res);
-        dispatch(onAddUser());
+        dispatch(userAdded());
         // dispatch(loadUsers());
       })
       .catch((error) => console.log(error));
@@ -71,9 +76,21 @@ export const getUserByid = (id) => {
     axios
       .get(`${apiUrl}/${id}`)
       .then((res) => {
-        console.log("Edit call", res);
-        dispatch(onGetUser(res.data));
-        // dispatch(loadUsers());
+        console.log("Edit call...", res);
+        dispatch(getUser(res.data));
+      })
+      .catch((error) => console.log(error));
+  };
+};
+// @Update User
+// Edit
+export const updateUser = (user, id) => {
+  return function (dispatch) {
+    axios
+      .put(`${apiUrl}/${id}`, user)
+      .then((res) => {
+        console.log("Update call...", res);
+        dispatch(userUpdated(res.data));
       })
       .catch((error) => console.log(error));
   };
