@@ -68,7 +68,13 @@ const Contacts = () => {
                   <TableCell align="right">{user.contact}</TableCell>
                   <TableCell align="right">{user.address}</TableCell>
                   <TableCell align="right">
-                    <Button variant="outlined" color="primary">
+                    <Button
+                      variant="outlined"
+                      color="primary"
+                      onClick={() => {
+                        navigate(`/editUser/${user.id}`);
+                      }}
+                    >
                       Edit
                     </Button>
                     <Button
